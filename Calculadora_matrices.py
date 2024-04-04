@@ -1,53 +1,74 @@
 import numpy as np
 import sys
+print()
 print("¡BIENVENIDO A LA PRIMERA CALCULADORA PERFECTA PARA EL CBC (CALCULADORA CBCIANA)!")
-print("")
+print()
 print("Esta sección de la calculadora fue diseñada para poder verificar/corroborar tus resultados al escalonar matrices")
 print("de sistemas lineales homogeneos de nxm.")
-print("Su creador (SojoSam) no se hace responsable por el uso indebido de la misma.")
+print("Su creador no se hace responsable por el uso indebido de la misma.")
 print("Ante cualquier problema en su utilización, advertencia de un mal cálculo realizado, ó simplemente desea compartir")
-print("alguna sugerencia, por favor enviar mail a iamsamuelsojo@gmail.com")
-print("")
-print("Si deseas apoyarme te dejo mi alias: sojo.sam.mp")
-print("")
+print("alguna sugerencia, por favor enviar mail a academicsamuel02@gmail.com")
+print()
+print("Si deseas ver otros proyectos relacionados con la calculadora cbciana entra a:")
+print()
+print("https://github.com/SojoSamCC/CALCULADORA-CBCIANA.git")
+print()
+print()
+print("Si deseas apoyarme te dejo mi link de cafecito: https://cafecito.app/teloexplicoencbc")
+print()
 print("Sin nada más que agregar, te dejo con la calculadora.")
-print("")
+print()
 print("Atte. su creador")
 print("-SojoSam")
-print("")
-print("ACLARACIÓN:")
-print("Para responder 'Sí' o  'No' a alguna pregunta, entonces debes presionar '1' para 'Sí' y cualquier otro NÚMERO para 'No")
-print("")
+print()
+for i in range (100):
+      print("-", end="")
+print()
+print()
 while True:
-      ecuaciones= int(input("ingresa cantidad de ecuaciones (en número y no en letras): "))
-      incognitas= int(input("ingresa cantidad de incognitas (en número y no en letras): "))
+      ecuaciones= int(input("Ingresa cantidad de ecuaciones (en número y no en letras): "))
+      print()
+      incognitas= int(input("Ingresa cantidad de incognitas (en número y no en letras): "))
       matriz= np.repeat(0,incognitas*ecuaciones)
       matriz=matriz.reshape(ecuaciones,incognitas)
       ordenar_matriz_cond=True
 
       for i in range(ecuaciones):
             for j in range(incognitas):
+                  print()
                   valor_incognita = float(input(f"Ingrese el valor del coeficiente de la incógnita {j + 1} en la ecuación {i + 1}: "))
                   matriz[i][j] = valor_incognita
       
       print(matriz)
       def multiplicar_por_un_escalar_fila():
-            fila=int(input("ingrese la fila a multiplicar por un escalar: "))
-            escalar=float(input("ingrese el escalar para multiplicar: "))
+            print()
+            fila=int(input("Ingrese la fila a multiplicar por un escalar: "))
+            print()
+            escalar=float(input("Ingrese el escalar para multiplicar: "))
             for j in range (incognitas):
                   matriz[(fila-1,j)]=matriz[(fila-1,j)]*escalar
             return matriz
 
       def operar_una_fila_con_otra_fila():
-            fila_principal=int(input("ingrese el número de fila a operar con otra: "))
-            fila_secundaria=int(input("ingrese la fila con la que se va a operar: "))
-            operacion=int(input("ingrese la operación a ser realizada entre ambas filas (presione 1 para 'suma' ó cualquier otro número para 'resta'): "))
-            if (operacion==1):
+            print()
+            fila_principal=int(input("Ingrese el número de fila que va a ser sumada o restada con otra fila: "))
+            print()
+            fila_secundaria=int(input("Ingrese el número de la otra fila que va a participar en la operación: "))
+            print()
+            print("- -")
+            print("INSTRUCCIONES PARA ASIGNAR OPERADOR ENTRE LAS FILAS")
+            print()
+            print('·)SUMA: ingrese "SUMA" o "Suma" o "+"')
+            print("·)RESTA: ingrese cualquier otro valor diferente a los de SUMA.")
+            print("- -")
+            print()
+            operacion=input("Ingrese la operación a ser realizada entre ambas filas: ")
+            if (operacion=="SUMA" or operacion=="Suma" or operacion=="+"):
                   for i in range(incognitas):
-                        matriz[(fila_principal-1,i)]=matriz[(fila_principal-1,i)]+matriz[(fila_secundaria-1,i)]
+                        matriz[(fila_secundaria-1,i)]=matriz[(fila_secundaria-1,i)]+matriz[(fila_principal-1,i)]
             else:
                   for j in range(incognitas):
-                        matriz[(fila_principal-1,j)]=matriz[(fila_principal-1,j)]-matriz[(fila_secundaria-1,j)]
+                        matriz[(fila_secundaria-1,j)]=matriz[(fila_secundaria-1,j)]-matriz[(fila_principal-1,j)]
             return matriz
 
       def restar_una_fila_con_otra_fila(fila_principal,fila_secundaria):
@@ -78,8 +99,9 @@ while True:
             return matriz
 
       while ordenar_matriz_cond!=False:
-            condicion3=int(input("¿Deseas ordenar la matriz? (Sí/No): "))
-            if (condicion3==1):
+            print()
+            condicion3=input("¿Deseas ordenar la matriz? (Y/n): ")
+            if (condicion3!="n"):
                   ordenar_matriz()
                   ordenar_matriz_cond=False
                   print(matriz)
@@ -117,23 +139,45 @@ while True:
 
       def escalonar_a_mano():
             if cond_esc_a_mano==True:
-                  multiplicar_por_un_escalar=True
-                  while multiplicar_por_un_escalar!=False:
-                        condicion=int(input("¿Desea multiplicar una fila por algún escalar? (Sí/No): "))
-                        if (condicion==1):
-                                    multiplicar_por_un_escalar_fila()
-                                    print(matriz)
-                        else:
-                              multiplicar_por_un_escalar=False
+                  condicion_multiplicar_por_escalar=True
+                  condicion_dividir_por_escalar=True
+                  condicion_operar_una_fila_con_otra=True
+                  while condicion_operar_una_fila_con_otra!=False:
+                        while condicion_multiplicar_por_escalar==True or condicion_dividir_por_escalar==True:
+                              print()
+                              condicion_multiplicar_por_escalar=input("¿Desea multiplicar una fila por algún escalar? (Y/n): ")
+                              if (condicion_multiplicar_por_escalar!="n"):
+                                          print()
+                                          multiplicar_por_un_escalar_fila()
+                                          print(matriz)
+                                          condicion_multiplicar_por_escalar=True
+                              else:
+                                    condicion_multiplicar_por_escalar=False
 
-                        operar_una_fila_con_otra=True
-                  while operar_una_fila_con_otra!=False:
-                        condicion2=int(input("¿Desea operar una fila con otra? (solo es válida la suma y resta entre dos filas a la vez) (Sí/No): "))
-                        if (condicion2==1):
+                              print()
+                              condicion_dividir_por_escalar=input("¿Desea dividir una fila por algún escalar diferente de 0 (Y/n): ")
+                              if (condicion_dividir_por_escalar!="n"):
+                                    print()
+                                    dividir_una_fila_entre_un_escalar()
+                                    print(matriz)
+                                    condicion_dividir_por_escalar=True
+                              else:
+                                    condicion_dividir_por_escalar=False
+                  
+                        print()
+                        condicion2=input("¿Desea operar una fila con otra? (solo es válida la suma y resta entre dos filas a la vez) (Y/n): ")
+                        if (condicion2!="n"):
                               operar_una_fila_con_otra_fila()
                               print(matriz)
                         else:
-                              operar_una_fila_con_otra=False
+                              print()
+                              condicion_continuar_operando=input("¿Deseas multiplicar o dividir alguna fila por algún escalar? (Y/n): ")
+                              if condicion_continuar_operando=="n":
+                                    condicion_operar_una_fila_con_otra=False
+                              else:
+                                    condicion_operar_una_fila_con_otra=True
+                                    condicion_multiplicar_por_escalar=True
+                                    condicion_dividir_por_escalar=True
             return matriz
 
       i=1
@@ -142,15 +186,17 @@ while True:
       cond_seguir2=True
       while i <= (ecuaciones-1) or j<=(incognitas-1):
             if i>(ecuaciones-1) or j>(incognitas-1):
+                  print()
                   print("La matriz ya está escalonada.")
-                  print("")
+                  print()
                   i=1
                   j=0
                   k=0
                   break
             else:
-                  condicion4=int(input("¿Desea escalonar en semiautomático? (Sí/No): "))
-                  if (condicion4==1):
+                  print()
+                  condicion4=input("¿Desea escalonar en semiautomático? (Y/n): ")
+                  if (condicion4!="n"):
                         escalonar(i,j,k)
                         print(matriz)
                         i+=1
@@ -161,43 +207,44 @@ while True:
                         break
       cond_esc_a_mano=True
       while cond_esc_a_mano==True:
-            condicion5=int(input("¿Deseas escalonar a mano? (Sí/No): "))
-            if (condicion5==1):
+            print()
+            condicion5=input("¿Deseas escalonar a mano? (Y/n): ")
+            if (condicion5!="n"):
                   escalonar_a_mano()
                   print(matriz)
             else:
                   break
             break
 
-      print("")
+      print()
       print("___________________________________________________________________________________")
-      print("")
+      print()
       print("Este programa ya no ofrece más opciones para escalonar :(")
-      print("")
+      print()
       print("¡Te invito a que utilices alguna de las opciones disponibles che!")
-      print("")
+      print()
       print("Tus opciones son:")
-      print("")
+      print()
       print("·)Escalonar alguna matriz.")
       print("·)salir del programa.")
-      print("")
-      cond_seguir1=int(input("¿Deseas escalonar alguna matriz? (Sí/No): "))
-      if cond_seguir1==1:
-            print("")
+      print()
+      cond_seguir1=input("¿Deseas escalonar alguna matriz? (Y/n): ")
+      if cond_seguir1!="n":
+            print()
             print("¡Yay!")
-            print("")
+            print()
             print("¡Entonces sigamos! :)")
-            print("")
-            print("")
+            print()
+            print()
             print("Por favor introduce una matriz que desees escalonar.")
-            print("")
+            print()
       else:
-            print("")
+            print()
             print("Bueeeno ¡Muchas gracias por utilizar la calculadora Cbciana para matrices! :D")
-            print("")
+            print()
             print("Trataré de agregar más funciones con el paso del tiempo (cálculo de determinante, con parámetros, etc.).")
-            print("")
+            print()
             print("Te invito a que también utilices la sección de 'Calculadora resolvente' (perfecta para física).")
-            print("")
+            print()
             input("¡Un abrazo enorme! Puedes presionar cualquier tecla para cerrar el programa.")
             sys.exit()

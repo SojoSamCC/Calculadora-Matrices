@@ -179,11 +179,10 @@ while True:
                                     condicion_multiplicar_por_escalar=True
                                     condicion_dividir_por_escalar=True
             return matriz
-
+      
       i=1
       j=0
       k=0
-      cond_seguir2=True
       while i <= (ecuaciones-1) or j<=(incognitas-1):
             if i>(ecuaciones-1) or j>(incognitas-1):
                   print()
@@ -195,26 +194,84 @@ while True:
                   break
             else:
                   print()
-                  condicion4=input("¿Desea escalonar en semiautomático? (Y/n): ")
+                  condicion4=input("¿Desea escalonar en automatico? (Y/n): ")
                   if (condicion4!="n"):
-                        escalonar(i,j,k)
+                        escalonado=False
+                        while escalonado==False:
+                              escalonar(i,j,k)
+                              i+=1
+                              j+=1
+                              k+=1
+                              if i > (ecuaciones-1) or j>(incognitas-1):
+                                    escalonado=True
+                              else:
+                                    escalonado=False
+                        print()
                         print(matriz)
-                        i+=1
-                        j+=1
-                        k+=1
-                        
                   else:
+                        while i <= (ecuaciones-1) or j<=(incognitas-1):
+                              if i>(ecuaciones-1) or j>(incognitas-1):
+                                    print()
+                                    print("La matriz ya está escalonada.")
+                                    print()
+                                    i=1
+                                    j=0
+                                    k=0
+                                    break
+                              else:
+                                    print()
+                                    condicion4=input("¿Desea escalonar en semiautomático? (Y/n): ")
+                                    if (condicion4!="n"):
+                                          escalonar(i,j,k)
+                                          print(matriz)
+                                          i+=1
+                                          j+=1
+                                          k+=1
+                                    else:
+                                          cond_esc_a_mano=True
+                                          while cond_esc_a_mano==True:
+                                                print()
+                                                condicion5=input("¿Deseas escalonar a mano? (Y/n): ")
+                                                if (condicion5!="n"):
+                                                      escalonar_a_mano()
+                                                      print(matriz)
+                                                else:
+                                                      break
+                                          break
                         break
-      cond_esc_a_mano=True
-      while cond_esc_a_mano==True:
-            print()
-            condicion5=input("¿Deseas escalonar a mano? (Y/n): ")
-            if (condicion5!="n"):
-                  escalonar_a_mano()
-                  print(matriz)
-            else:
-                  break
-            break
+
+
+      # while i <= (ecuaciones-1) or j<=(incognitas-1):
+      #       if i>(ecuaciones-1) or j>(incognitas-1):
+      #             print()
+      #             print("La matriz ya está escalonada.")
+      #             print()
+      #             i=1
+      #             j=0
+      #             k=0
+      #             break
+      #       else:
+      #             print()
+      #             condicion4=input("¿Desea escalonar en semiautomático? (Y/n): ")
+      #             if (condicion4!="n"):
+      #                   escalonar(i,j,k)
+      #                   print(matriz)
+      #                   i+=1
+      #                   j+=1
+      #                   k+=1
+                        
+      #             else:
+      #                   break
+      
+      # while cond_esc_a_mano==True:
+      #       print()
+      #       condicion5=input("¿Deseas escalonar a mano? (Y/n): ")
+      #       if (condicion5!="n"):
+      #             escalonar_a_mano()
+      #             print(matriz)
+      #       else:
+      #             break
+      #       break
 
       print()
       print("___________________________________________________________________________________")
